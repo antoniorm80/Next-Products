@@ -1,6 +1,6 @@
 import { initializeApp } from "firebase/app";
 import { createUserWithEmailAndPassword, getAuth, sendPasswordResetEmail, signInWithEmailAndPassword, updateProfile } from "firebase/auth";
-import { getFirestore, setDoc, doc, serverTimestamp, getDoc, updateDoc } from 'firebase/firestore';
+import { getFirestore, setDoc, doc, serverTimestamp, getDoc, updateDoc, addDoc, collection, query, getDocs } from 'firebase/firestore';
 import { getStorage, uploadString, getDownloadURL, ref} from "firebase/storage";
 
 const firebaseConfig = {
@@ -51,9 +51,24 @@ export const signOutAccount = () =>{
 }
 
 // DATABASE FUNCTIONS
+
+// ===== Upload a file with base64 format and get the usl =====
+export const getcollection = async (collectionName: string, queryArray?: any[]) => {
+  const ref = collection(db, collectionName);
+  const q = queryArray ? query(ref, ...queryArray) : query(ref);
+
+  return (await getDocs(q)).docs.map((doc) => ({ id: doc.id, ...doc.data()}));
+}
+
 // ===== Get a document from a collection =====
 export const getDocument = async (path: string) => {  
   return (await getDoc(doc(db, path))).data();
+}
+
+// ===== Add a document in a collection =====
+export const addDocument = (path: string, data: any) => {
+  data.createdAt = serverTimestamp();  
+  return addDoc(collection(db, path), data);
 }
 
 // ===== Set a document in a collection =====
