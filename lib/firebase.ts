@@ -1,6 +1,6 @@
 import { initializeApp } from "firebase/app";
 import { createUserWithEmailAndPassword, getAuth, sendPasswordResetEmail, signInWithEmailAndPassword, updateProfile } from "firebase/auth";
-import { getFirestore, setDoc, doc, serverTimestamp, getDoc, updateDoc, addDoc, collection, query, getDocs } from 'firebase/firestore';
+import { getFirestore, setDoc, doc, serverTimestamp, getDoc, updateDoc, addDoc, collection, query, getDocs, deleteDoc } from 'firebase/firestore';
 import { getStorage, uploadString, getDownloadURL, ref} from "firebase/storage";
 
 const firebaseConfig = {
@@ -80,6 +80,11 @@ export const setDocument = (path: string, data: any) => {
 // ===== Update a document in a collection =====
 export const updateDocument = (path: string, data: any) => {
   return updateDoc(doc(db, path), data);
+}
+
+// ===== Delete a document from a collection =====
+export const deleteDocument = (path: string) => {
+  return deleteDoc(doc(db, path));
 }
 
 // STORAGE FUNCTIONS

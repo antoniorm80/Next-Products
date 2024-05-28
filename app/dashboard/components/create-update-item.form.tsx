@@ -17,19 +17,28 @@ import { CirclePlus } from "lucide-react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import * as z from "zod";
-import { addDocument, uploadBase64 } from "@/lib/firebase";
-import { useState } from "react";
+import { addDocument, updateDocument, uploadBase64 } from "@/lib/firebase";
+import { useEffect, useState } from "react";
 import { LoaderCircle } from "lucide-react";
 import toast from "react-hot-toast";
 import { ItemImage } from "@/interfaces/item-image.interface";
 import DragAndDropImage from "@/components/drag-and-drop-image";
 import { useUser } from "@/hooks/use-user";
 import { Product } from "@/interfaces/product.interfaces";
+import Image from "next/image";
 
-export function CreateUpdateItem() {
+interface CreateUpdateItemProps {
+  children: React.ReactNode;
+  itemToUpdate?: Product;
+  getItems: () => Promise<void>;
+}
+
+
+export function CreateUpdateItem( {children, itemToUpdate, getItems} : CreateUpdateItemProps ) {
   const user = useUser();
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [open, setOpen] = useState(false);
+  const [image, setImage] = useState<string>('');
 
   const formSchema = z.object({
     image: z.object({
@@ -45,7 +54,7 @@ export function CreateUpdateItem() {
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
-    defaultValues: {
+    defaultValues: itemToUpdate ? itemToUpdate :{
       image: {} as ItemImage,
       name: "",
       price: undefined,
@@ -58,28 +67,22 @@ export function CreateUpdateItem() {
 
   // ===== Update the image value =====
   const handleImage = (url: string) => {
-    let path = `${user?.uid}/${Date.now()}`;
+    let path = itemToUpdate ? itemToUpdate.image.path : `${user?.uid}/${Date.now()}`;
     setValue('image', {url, path});
+    setImage(url);
   }
+
+  useEffect(() => {
+    if(itemToUpdate) setImage(itemToUpdate.image.url);
+  }, [open])
+  
    
   // ===== Submit: create or update item  =====
   const onSubmit = async (item: z.infer<typeof formSchema>) => {
-     console.log(item);
-     createItemInDB(item);
-    // setIsLoading(true);
-    // try {
-    //   let res = await createUser(user);
-    //   await updateUser({ displayName: user.name });
-
-    //   user.uid = res.user.uid;
-
-    //   await createUserInDB(user as User);
-    // } catch (error: any) {
-    //   // console.log(error);
-    //   toast.error(error.message, { duration: 2500 });
-    // } finally {
-    //   setIsLoading(false);
-    // }
+     
+    if(itemToUpdate) updateItemInDB(item);
+    else createItemInDB(item);
+   
   };
 
   // ===== Create item in Firebase Database =====
@@ -98,7 +101,40 @@ export function CreateUpdateItem() {
 
       await addDocument(path, item);
 
-      toast.success("Artículo creado exitosamente!");
+      toast.success("Producto creado exitosamente!");
+
+      getItems();
+      setOpen(false);
+      form.reset();
+
+    } catch (error: any) {
+      toast.error(error.message, { duration: 2500 });
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
+  // ===== Update item in Firebase Database =====
+  const updateItemInDB = async (item: Product) => {
+    const path = `users/${user?.uid}/products/${itemToUpdate?.id}`;
+    setIsLoading(true);
+
+    try {
+      
+      // ===== if the image change, Upload image and get url  =====
+      if( itemToUpdate?.image.url !== item.image.url)  {
+        const base64 = item.image.url;
+        const imagePath = item.image.path;
+        const imageUrl = await uploadBase64(imagePath, base64);
+        
+        item.image.url = imageUrl;
+      }
+      
+
+      await updateDocument(path, item);
+
+      toast.success("Producto actualizado exitosamente!");
+      getItems();
       setOpen(false);
       form.reset();
 
@@ -112,14 +148,13 @@ export function CreateUpdateItem() {
   return (
     <Dialog open={open} onOpenChange={setOpen}>
       <DialogTrigger asChild>
-        <Button variant="outline">
-          Crear
-          <CirclePlus className="ml-2 w-[20px]" />
-        </Button>
+        {
+          children
+        }
       </DialogTrigger>
       <DialogContent className="sm:max-w-[425px]">
         <DialogHeader>
-          <DialogTitle>Crear Producto</DialogTitle>
+          <DialogTitle> { itemToUpdate ? 'Actualizar producto' : "Crear producto" } </DialogTitle>
           <DialogDescription>            
             Administra tus productos con la siguiente información.
           </DialogDescription>
@@ -130,8 +165,32 @@ export function CreateUpdateItem() {
             <div className="mb-3">
               <Label htmlFor="image" className="text-1xl font-semibold">
                 Imagen
-              </Label>             
-              <DragAndDropImage handleImage={handleImage}/>
+              </Label>
+              {image ? 
+              (
+                <div className="text-center">
+                   <Image
+                  width={1000}
+                  height={1000}
+                  src={image}
+                  alt="item image"
+                  className="w-[50%] m-auto"
+                  />
+                  <Button
+                  type="button"
+                  onClick={() => handleImage('')}
+                  disabled={isLoading}
+                  className="mt-6"
+                  >
+                    Remover Imagen
+                  </Button>
+                </div>
+                 
+              ) : (
+                  <DragAndDropImage handleImage={handleImage}/>
+              )
+              }
+              
             </div>
 
             {/* Name */}
@@ -188,7 +247,7 @@ export function CreateUpdateItem() {
                 {isLoading && (
                   <LoaderCircle className="mr-2 h-4 w-4 animate-spin" />
                 )}
-                Crear
+                { itemToUpdate ? 'Actualizar' : "Crear" }
               </Button>
             </DialogFooter>
           </div>
