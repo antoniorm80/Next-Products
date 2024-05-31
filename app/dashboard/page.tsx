@@ -15,7 +15,7 @@ const Dashboard = () => {
       <div className="md:border border-solid border-gray-300 rounded-3xl p-3 md:m-6 lg:mx-36">
         <Items />
         {/* <ShowDrawer/> */}
-      </div>
+      </div>      
     </>
   );
 };
