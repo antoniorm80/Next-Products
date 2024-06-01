@@ -6,6 +6,7 @@ A.- Blocks - Dashboard
 1.- Verificar lo de las imágenes del avatar en los dashboard
 2.- Aplicar el "Lift Mode" en las que aplique
 3.- Agregar el "layout" page y activar el navbar
+4.- Aplicar el "Dark Mode"
 
 B.- Logins - Authentication
 1.- Validar el centrado del LoginFrom01
