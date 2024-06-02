@@ -1,19 +1,31 @@
-Login
-deviajemex@hotmail.com
-Papi791
+|+++ Login
+          deviajemex@hotmail.com
+          Papi791
 
+|+++  GitHub - Repository
+          Next-Products
+
+|+++  Task
 A.- Blocks - Dashboard
-1.- Verificar lo de las imágenes del avatar en los dashboard
-2.- Aplicar el "Lift Mode" en las que aplique
-3.- Agregar el "layout" page y activar el navbar
-4.- Aplicar el "Dark Mode"
+          1.- Verificar lo de las imágenes del avatar en los dashboard
+          2.- Aplicar el "Lift Mode" en las que aplique
+          3.- Agregar el "layout" page y activar el navbar
+          4.- Aplicar el "Dark Mode"
 
 B.- Logins - Authentication
-1.- Validar el centrado del LoginFrom01
-2-- 
+          1.- Validar el centrado del LoginFrom01 --> Done
+          2-- 
 
 C.- Examples
+          1.- Authentication   --> Done
+          2.- Forms  --> Done
+          3.- Dashboard
+          4.- Mail
+          5.- Cards
+          6.- Tasks
+          7.- Playground
+          8.- Music
 
-D.- GitHub
-1.- Agregar los cambios a git 
+D.- GitHub - Actualizar
+          1.- Agregar los cambios a git   --> Done 
 
