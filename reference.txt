@@ -7,7 +7,7 @@
 
 |+++  Task
 A.- Blocks - Dashboard
-          1.- Verificar lo de las imágenes del avatar en los dashboard
+          1.- Verificar lo de las imágenes del avatar en los dashboard --> Done
           2.- Aplicar el "Lift Mode" en las que aplique
           3.- Agregar el "layout" page y activar el navbar
           4.- Aplicar el "Dark Mode"
@@ -17,14 +17,16 @@ B.- Logins - Authentication
           2-- 
 
 C.- Examples
-          1.- Authentication   --> Done
+          1.- Authentication --> Done
           2.- Forms  --> Done
-          3.- Dashboard
-          4.- Mail
-          5.- Cards
-          6.- Tasks
-          7.- Playground
-          8.- Music
+          3.- Dashboard --> Done
+          4.- Mail --> Done
+          5.- Cards --> Done
+          6.- Tasks --> Done
+          7.- Playground --> Done
+          8.- Music --> Done
+
+          9.- Hacer más chico el alto de las filas en la tabla  (Tasks) --> Done
 
 D.- GitHub - Actualizar
           1.- Agregar los cambios a git   --> Done 
