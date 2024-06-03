@@ -24,7 +24,7 @@ interface ExamplesLayoutProps {
 export default function ExamplesLayout({ children }: ExamplesLayoutProps) {
   return (
     <div className="container relative">
-      <PageHeader>
+      {/* <PageHeader>
         <Announcement />
         <PageHeaderHeading className="hidden md:block">
           Check out some examples
@@ -48,7 +48,7 @@ export default function ExamplesLayout({ children }: ExamplesLayoutProps) {
             Components
           </Link>
         </PageActions>
-      </PageHeader>
+      </PageHeader> */}
       <section>
         <ExamplesNav />
         <div className="overflow-hidden rounded-[0.5rem] border bg-background shadow">
