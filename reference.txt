@@ -5,9 +5,8 @@
 |+++  GitHub - Repository
           Next-Products
 
-
-|+++  Tutorial - Yorch - Time: 
-https://www.youtube.com/watch?v=UshXwMe-piM
+|+++  Tutorial - Yorch - Time: Completado Jun 03, 2024
+          https://www.youtube.com/watch?v=UshXwMe-piM
 
 |+++  Task
 A.- Blocks - Dashboard

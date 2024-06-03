@@ -21,13 +21,13 @@ const SignUp = () => {
             </div>
         </div>
 
-       {/* Image */}
+       {/* ===== Image ===== */}
        <div className="relative hidden h-full flex-col p-10 text-white lg:flex">
           <div className="bg-auth absolute inset-0"></div>
           <Logo/>
           <div className="relative z-20 mt-auto">
             <p className="text-lg">
-              &ldquo;This web application helps me to make my life easy&ldquo;
+              {"This web application helps me to make my life easy"}
             </p>
             <footer className="text-sm"> Software Developer </footer>
           </div>

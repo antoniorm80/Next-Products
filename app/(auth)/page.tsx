@@ -16,8 +16,8 @@ const AuthPage = () => {
           <div className="bg-auth absolute inset-0"></div>
           <Logo/>
           <div className="relative z-20 mt-auto">
-            <p className="text-lg">
-              &ldquo;This web application helps me to make my life easy&ldquo;
+            <p className="text-lg">              
+              {"This web application helps me to make my life easy"}
             </p>
             <footer className="text-sm"> Antonio Rivera</footer>
           </div>

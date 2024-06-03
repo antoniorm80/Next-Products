@@ -119,7 +119,7 @@ const SingInForm = () => {
 
       {/* Sing Up */}
       <p className="text-center text-sm text-muted-foreground">
-        ¿No tiene una cuenta?{" "}
+        {"¿No tiene una cuenta? "}
         <Link
           href="/sign-up"
           className="underline underline-offset-4 hover:text-primary"
