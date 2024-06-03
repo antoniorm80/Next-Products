@@ -107,6 +107,8 @@ export function CreateUpdateItem( {children, itemToUpdate, getItems} : CreateUpd
       setOpen(false);
       form.reset();
 
+      setImage('');
+
     } catch (error: any) {
       toast.error(error.message, { duration: 2500 });
     } finally {
@@ -137,6 +139,7 @@ export function CreateUpdateItem( {children, itemToUpdate, getItems} : CreateUpd
       getItems();
       setOpen(false);
       form.reset();
+      setImage('');
 
     } catch (error: any) {
       toast.error(error.message, { duration: 2500 });

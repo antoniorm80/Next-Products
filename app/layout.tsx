@@ -1,6 +1,6 @@
 'use client'
 
-import { Inter } from "next/font/google";
+import { Inter, Montserrat, Poppins, Raleway, Quicksand} from "next/font/google";
 import "./globals.css";
 import { Toaster } from "react-hot-toast";
 import { useUser } from "@/hooks/use-user";

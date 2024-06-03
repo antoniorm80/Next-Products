@@ -10,9 +10,16 @@ import {
     AlertDialogTrigger,
   } from "@/components/ui/alert-dialog"
   import { Button } from "@/components/ui/button"
+import { Product } from "@/interfaces/product.interfaces";
 import * as React from 'react';
+
+interface ConfirmDeletionProps {
+  children: React.ReactNode;
+  deleteItemInDB: (item: Product) => Promise<void>;
+  item: Product;
+}
   
-  export function ConfirmDeletion({ children} : { children: React.ReactNode}) {
+  export function ConfirmDeletion({ children, deleteItemInDB, item} : ConfirmDeletionProps) {
     return (
       <AlertDialog>
         <AlertDialogTrigger asChild>
@@ -28,7 +35,7 @@ import * as React from 'react';
           </AlertDialogHeader>
           <AlertDialogFooter>
             <AlertDialogCancel>Cancelar</AlertDialogCancel>
-            <AlertDialogAction>Continuar</AlertDialogAction>
+            <AlertDialogAction  onClick={() => deleteItemInDB(item)}>Continuar</AlertDialogAction>
           </AlertDialogFooter>
         </AlertDialogContent>
       </AlertDialog>

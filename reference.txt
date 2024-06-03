@@ -5,6 +5,10 @@
 |+++  GitHub - Repository
           Next-Products
 
+
+|+++  Tutorial - Yorch - Time: 
+https://www.youtube.com/watch?v=UshXwMe-piM
+
 |+++  Task
 A.- Blocks - Dashboard
           1.- Verificar lo de las imágenes del avatar en los dashboard --> Done
